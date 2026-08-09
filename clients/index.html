@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DevOS | Developer Operating System</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+
+    <!-- Chart.js -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<div class="background"></div>
+
+<div class="container">
+
+<!-- ===================================================== -->
+<!-- Sidebar -->
+<!-- ===================================================== -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <img src="../assets/images/logo.png">
+
+        <h2>DevOS</h2>
+
+    </div>
+
+    <ul class="menu">
+
+        <li class="active">
+
+            <i class="fa-solid fa-house"></i>
+
+            <span>Dashboard</span>
+
+        </li>
+
+        <li>
+
+            <i class="fa-solid fa-code"></i>
+
+            <span>LeetCode</span>
+
+        </li>
+
+        <li>
+
+            <i class="fa-solid fa-book-open"></i>
+
+            <span>100xDevs</span>
+
+        </li>
+
+        <li>
+
+            <i class="fa-solid fa-robot"></i>
+
+            <span>AI Project</span>
+
+        </li>
+
+        <li>
+
+            <i class="fa-solid fa-calendar-days"></i>
+
+            <span>Planner</span>
+
+        </li>
+
+        <li>
+
+            <i class="fa-solid fa-list-check"></i>
+
+            <span>Habits</span>
+
+        </li>
+
+        <li>
+
+            <i class="fa-solid fa-clock"></i>
+
+            <span>Pomodoro</span>
+
+        </li>
+
+        <li>
+
+            <i class="fa-solid fa-chart-line"></i>
+
+            <span>Analytics</span>
+
+        </li>
+
+        <li>
+
+            <i class="fa-solid fa-gear"></i>
+
+            <span>Settings</span>
+
+        </li>
+
+    </ul>
+
+</aside>
+
+<!-- ===================================================== -->
+<!-- Main -->
+<!-- ===================================================== -->
+
+<main class="main">
+
+<!-- ===================================================== -->
+<!-- Header -->
+<!-- ===================================================== -->
+
+<header class="header glass">
+
+<div class="search">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+<input
+type="text"
+placeholder="Search anything...">
+
+</div>
+
+<div class="header-right">
+
+<button id="themeBtn">
+
+<i class="fa-solid fa-moon"></i>
+
+</button>
+
+<button>
+
+<i class="fa-solid fa-bell"></i>
+
+</button>
+
+<div class="profile">
+
+<img src="../assets/images/profile.png">
+
+<div>
+
+<h4>Jagadeesh</h4>
+
+<p>Developer</p>
+
+</div>
+
+</div>
+
+</div>
+
+</header>
+
+<!-- ===================================================== -->
+<!-- Hero Banner -->
+<!-- ===================================================== -->
+
+<section class="hero glass">
+
+<div class="hero-left">
+
+<h1>
+
+Welcome Back 👋
+
+</h1>
+
+<h3>
+
+Keep pushing your limits.
+
+</h3>
+
+<p>
+
+Consistency beats motivation.
+Solve problems.
+Build projects.
+Become unstoppable.
+
+</p>
+
+<button>
+
+Continue Learning
+
+</button>
+
+</div>
+
+<div class="hero-right">
+
+<img src="assets/images/dashboard-banner.jpg">
+
+</div>
+
+</section>
+
+<!-- ===================================================== -->
+<!-- Statistics -->
+<!-- ===================================================== -->
+
+<section class="stats">
+
+<div class="stat-card glass">
+
+<div class="icon">
+
+<i class="fa-solid fa-code"></i>
+
+</div>
+
+<div>
+
+<h2 id="leetcodeSolved">
+
+0 / 35
+
+</h2>
+
+<p>
+
+LeetCode Solved
+
+</p>
+
+</div>
+
+</div>
+
+<div class="stat-card glass">
+
+<div class="icon">
+
+<i class="fa-solid fa-fire"></i>
+
+</div>
+
+<div>
+
+<h2>
+
+12 Days
+
+</h2>
+
+<p>
+
+Current Streak
+
+</p>
+
+</div>
+
+</div>
+
+<div class="stat-card glass">
+
+<div class="icon">
+
+<i class="fa-solid fa-clock"></i>
+
+</div>
+
+<div>
+
+<h2>
+
+25:00
+
+</h2>
+
+<p>
+
+Focus Time
+
+</p>
+
+</div>
+
+</div>
+
+<div class="stat-card glass">
+
+<div class="icon">
+
+<i class="fa-solid fa-rocket"></i>
+
+</div>
+
+<div>
+
+<h2>
+
+75%
+
+</h2>
+
+<p>
+
+Projects
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===================================================== -->
+<!-- Analytics Section -->
+<!-- ===================================================== -->
+
+<section class="analytics">
+
+    <div class="glass chart-card">
+
+        <div class="card-header">
+
+            <h2>Weekly Coding Analytics</h2>
+
+            <span>This Week</span>
+
+        </div>
+
+        <canvas id="codingChart"></canvas>
+
+    </div>
+
+</section>
+
+<!-- ===================================================== -->
+<!-- Dashboard Grid -->
+<!-- ===================================================== -->
+
+<section class="dashboard-grid">
+
+    <!-- Today's Tasks -->
+
+    <div class="glass task-card">
+
+    <div class="card-header">
+
+        <h2>Today's Tasks</h2>
+
+    </div>
+
+    <div class="task-add">
+
+        <input
+        id="taskInput"
+        placeholder="Add new task">
+
+        <button id="addTask">
+
+            Add
+
+        </button>
+
+    </div>
+
+    <ul
+    id="taskList"
+    class="task-list">
+
+    </ul>
+
+</div>
+
+<div class="glass leetcode-card">
+
+    <div class="card-header">
+
+        <h2>💻 LeetCode Tracker</h2>
+
+    </div>
+
+    <div class="leetcode-stats">
+
+        <div class="level easy">
+            <h3 id="easyCount">0</h3>
+            <p>Easy</p>
+        </div>
+
+        <div class="level medium">
+            <h3 id="mediumCount">0</h3>
+            <p>Medium</p>
+        </div>
+
+        <div class="level hard">
+            <h3 id="hardCount">0</h3>
+            <p>Hard</p>
+        </div>
+
+    </div>
+
+    <div class="progress">
+
+        <div
+            id="leetcodeProgress"
+            class="progress-fill">
+
+        </div>
+
+    </div>
+
+    <h3 id="leetcodeTotal">
+
+        0 / 35 Problems
+
+    </h3>
+
+    <div class="leetcode-buttons">
+
+        <button id="easyBtn">
+
+            + Easy
+
+        </button>
+
+        <button id="mediumBtn">
+
+            + Medium
+
+        </button>
+
+        <button id="hardBtn">
+
+            + Hard
+
+        </button>
+
+        <button id="resetLeetcode">
+
+            Reset
+
+        </button>
+
+    </div>
+
+</div>
+
+<div class="glass course-card">
+
+    <div class="card-header">
+        <h2>💼 100xDevs Progress</h2>
+    </div>
+
+    <div class="course">
+
+        <div class="course-info">
+            <span>HTML</span>
+            <span id="htmlPercent">0%</span>
+        </div>
+
+        <div class="progress">
+            <div id="htmlBar" class="progress-fill"></div>
+        </div>
+
+        <div class="course-buttons">
+            <button onclick="changeProgress('html',10)">+10%</button>
+            <button onclick="changeProgress('html',-10)">-10%</button>
+        </div>
+
+    </div>
+
+    <div class="course">
+
+        <div class="course-info">
+            <span>CSS</span>
+            <span id="cssPercent">0%</span>
+        </div>
+
+        <div class="progress">
+            <div id="cssBar" class="progress-fill"></div>
+        </div>
+
+        <div class="course-buttons">
+            <button onclick="changeProgress('css',10)">+10%</button>
+            <button onclick="changeProgress('css',-10)">-10%</button>
+        </div>
+
+    </div>
+
+    <div class="course">
+
+        <div class="course-info">
+            <span>JavaScript</span>
+            <span id="jsPercent">0%</span>
+        </div>
+
+        <div class="progress">
+            <div id="jsBar" class="progress-fill"></div>
+        </div>
+
+        <div class="course-buttons">
+            <button onclick="changeProgress('js',10)">+10%</button>
+            <button onclick="changeProgress('js',-10)">-10%</button>
+        </div>
+
+    </div>
+
+    <div class="course">
+
+        <div class="course-info">
+            <span>Backend</span>
+            <span id="backendPercent">0%</span>
+        </div>
+
+        <div class="progress">
+            <div id="backendBar" class="progress-fill"></div>
+        </div>
+
+        <div class="course-buttons">
+            <button onclick="changeProgress('backend',10)">+10%</button>
+            <button onclick="changeProgress('backend',-10)">-10%</button>
+        </div>
+
+    </div>
+
+</div>
+    <!-- Pomodoro -->
+
+    <div class="glass pomodoro-card">
+
+        <div class="card-header">
+
+            <h2>Pomodoro Timer</h2>
+
+            <i class="fa-solid fa-clock"></i>
+
+        </div>
+
+        <h1 id="timer">
+
+            25:00
+
+        </h1>
+
+        <div class="timer-buttons">
+
+            <button id="startBtn">
+
+                Start
+
+            </button>
+
+            <button id="pauseBtn">
+
+                Pause
+
+            </button>P
+
+            <button id="resetBtn">
+
+                Reset
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- AI Project -->
+
+    <div class="glass ai-card">
+
+    <div class="card-header">
+        <h2>🚀 AI Project Roadmap</h2>
+    </div>
+
+    <div class="project-progress">
+
+        <div class="progress">
+
+            <div id="projectBar" class="progress-fill"></div>
+
+        </div>
+
+        <h3 id="projectPercent">
+            0% Completed
+        </h3>
+
+    </div>
+
+    <div id="milestoneList">
+
+    </div>
+
+    <textarea
+        id="projectNotes"
+        placeholder="Project Notes..."></textarea>
+
+    <button id="saveNotes">
+
+        Save Notes
+
+    </button>
+
+</div>
+
+    <!-- Habit Tracker -->
+
+    <div class="glass habit-card">
+
+    <div class="card-header">
+        <h2>🔥 Habit Tracker</h2>
+    </div>
+
+    <div class="habit-add">
+
+        <input
+            type="text"
+            id="habitInput"
+            placeholder="Add New Habit">
+
+        <button id="addHabit">
+            Add
+        </button>
+
+    </div>
+
+    <div id="habitList"></div>
+
+</div>
+
+    <!-- Weekly Planner -->
+
+<div class="glass planner-card">
+
+    <div class="card-header">
+
+        <h2>📅 Weekly Planner</h2>
+
+    </div>
+
+    <div class="planner-add">
+
+        <input
+            type="text"
+            id="plannerTask"
+            placeholder="Activity">
+
+        <select id="plannerDay">
+
+            <option>Monday</option>
+            <option>Tuesday</option>
+            <option>Wednesday</option>
+            <option>Thursday</option>
+            <option>Friday</option>
+            <option>Saturday</option>
+            <option>Sunday</option>
+
+        </select>
+
+        <input
+            type="time"
+            id="plannerTime">
+
+        <button id="plannerAdd">
+
+            Add
+
+        </button>
+
+    </div>
+
+    <div class="planner-grid">
+
+        <div class="day-column">
+            <h3>Monday</h3>
+            <div id="Monday"></div>
+        </div>
+
+        <div class="day-column">
+            <h3>Tuesday</h3>
+            <div id="Tuesday"></div>
+        </div>
+
+        <div class="day-column">
+            <h3>Wednesday</h3>
+            <div id="Wednesday"></div>
+        </div>
+
+        <div class="day-column">
+            <h3>Thursday</h3>
+            <div id="Thursday"></div>
+        </div>
+
+        <div class="day-column">
+            <h3>Friday</h3>
+            <div id="Friday"></div>
+        </div>
+
+        <div class="day-column">
+            <h3>Saturday</h3>
+            <div id="Saturday"></div>
+        </div>
+
+        <div class="day-column">
+            <h3>Sunday</h3>
+            <div id="Sunday"></div>
+        </div>
+
+    </div>
+
+</div>
+
+    <!-- Quote -->
+
+    <div class="glass quote-card">
+
+        <div class="card-header">
+
+            <h2>Quote of the Day</h2>
+
+        </div>
+
+        <blockquote>
+
+            "Success doesn't come from what you do occasionally. It comes from what you do consistently."
+
+        </blockquote>
+
+    </div>
+
+</section>
+
+<!-- ===================================================== -->
+<!-- Calendar -->
+<!-- ===================================================== -->
+
+<section class="calendar-section">
+
+    <div class="glass calendar-card">
+
+        <div class="card-header">
+
+            <h2>August 2026</h2>
+
+            <i class="fa-solid fa-calendar"></i>
+
+        </div>
+
+        <div class="calendar-grid">
+
+            <span>Sun</span>
+            <span>Mon</span>
+            <span>Tue</span>
+            <span>Wed</span>
+            <span>Thu</span>
+            <span>Fri</span>
+            <span>Sat</span>
+
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div class="active-day">6</div>
+            <div>7</div>
+
+            <div>8</div>
+            <div>9</div>
+            <div>10</div>
+            <div>11</div>
+            <div>12</div>
+            <div>13</div>
+            <div>14</div>
+
+            <div>15</div>
+            <div>16</div>
+            <div>17</div>
+            <div>18</div>
+            <div>19</div>
+            <div>20</div>
+            <div>21</div>
+
+            <div>22</div>
+            <div>23</div>
+            <div>24</div>
+            <div>25</div>
+            <div>26</div>
+            <div>27</div>
+            <div>28</div>
+
+            <div>29</div>
+            <div>30</div>
+            <div>31</div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ===================================================== -->
+<!-- Footer -->
+<!-- ===================================================== -->
+
+<footer class="footer glass">
+
+    <div class="footer-left">
+
+        <h3>DevOS</h3>
+
+        <p>
+            Build • Learn • Grow • Repeat
+        </p>
+
+    </div>
+
+    <div class="footer-center">
+
+        <p>
+            © 2026 DevOS Dashboard. All Rights Reserved.
+        </p>
+
+    </div>
+
+    <div class="footer-right">
+
+        <a href="#">
+            <i class="fa-brands fa-github"></i>
+        </a>
+
+        <a href="#">
+            <i class="fa-brands fa-linkedin"></i>
+        </a>
+
+        <a href="#">
+            <i class="fa-solid fa-envelope"></i>
+        </a>
+
+    </div>
+
+</footer>
+
+</main>
+
+</div>
+
+<!-- JavaScript -->
+<script src="js/script.js"></script>
+
+</body>
+
+</html>

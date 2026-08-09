@@ -1,0 +1,2095 @@
+/* =====================================================
+   DevOS Dashboard
+   Glassmorphism UI
+=====================================================*/
+
+/* Google Font */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* ==========================
+   Reset
+==========================*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    background:#080B17;
+    color:#fff;
+    overflow-x:hidden;
+
+}
+
+/* ==========================
+   Animated Background
+==========================*/
+
+.background{
+
+    position:fixed;
+
+    width:100%;
+
+    height:100%;
+
+    top:0;
+
+    left:0;
+
+    z-index:-2;
+
+    background:
+
+    radial-gradient(circle at top left,#7c4dff55,transparent 40%),
+
+    radial-gradient(circle at bottom right,#00c2ff44,transparent 40%),
+
+    linear-gradient(135deg,#070b16,#0b1023,#080b17);
+
+}
+
+/* floating blobs */
+
+.background::before{
+
+content:"";
+
+position:absolute;
+
+width:500px;
+
+height:500px;
+
+border-radius:50%;
+
+background:#7c4dff33;
+
+filter:blur(120px);
+
+top:-150px;
+
+left:-150px;
+
+animation:float1 14s infinite alternate;
+
+}
+
+.background::after{
+
+content:"";
+
+position:absolute;
+
+width:450px;
+
+height:450px;
+
+border-radius:50%;
+
+background:#00c2ff33;
+
+filter:blur(120px);
+
+bottom:-150px;
+
+right:-150px;
+
+animation:float2 15s infinite alternate;
+
+}
+
+@keyframes float1{
+
+from{
+
+transform:translate(0,0);
+
+}
+
+to{
+
+transform:translate(120px,80px);
+
+}
+
+}
+
+@keyframes float2{
+
+from{
+
+transform:translate(0,0);
+
+}
+
+to{
+
+transform:translate(-100px,-70px);
+
+}
+
+}
+
+/* ==========================
+   Layout
+==========================*/
+
+.container{
+
+display:grid;
+
+grid-template-columns:280px 1fr;
+
+min-height:100vh;
+
+}
+
+/* ==========================
+   Glass Effect
+==========================*/
+
+.glass{
+
+background:rgba(255,255,255,.08);
+
+border:1px solid rgba(255,255,255,.12);
+
+backdrop-filter:blur(22px);
+
+-webkit-backdrop-filter:blur(22px);
+
+border-radius:22px;
+
+box-shadow:
+
+0 8px 35px rgba(0,0,0,.35),
+
+0 0 20px rgba(124,77,255,.08);
+
+transition:.35s;
+
+}
+
+.glass:hover{
+
+transform:translateY(-4px);
+
+box-shadow:
+
+0 12px 45px rgba(0,0,0,.45),
+
+0 0 25px rgba(124,77,255,.25);
+
+}
+
+/* ==========================
+ Sidebar
+==========================*/
+
+.sidebar{
+
+padding:30px;
+
+border-right:1px solid rgba(255,255,255,.08);
+
+background:rgba(8,11,23,.45);
+
+backdrop-filter:blur(25px);
+
+position:sticky;
+
+top:0;
+
+height:100vh;
+
+}
+
+.logo{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+margin-bottom:45px;
+
+}
+
+.logo img{
+
+width:55px;
+
+height:55px;
+
+border-radius:15px;
+
+}
+
+.logo h2{
+
+font-size:28px;
+
+font-weight:700;
+
+background:linear-gradient(90deg,#7c4dff,#00c2ff);
+
+-webkit-background-clip:text;
+
+color:transparent;
+
+}
+
+.menu{
+
+list-style:none;
+
+}
+
+.menu li{
+
+display:flex;
+
+align-items:center;
+
+gap:16px;
+
+padding:16px 18px;
+
+margin-bottom:14px;
+
+border-radius:15px;
+
+cursor:pointer;
+
+transition:.3s;
+
+font-size:16px;
+
+}
+
+.menu li i{
+
+font-size:20px;
+
+width:25px;
+
+text-align:center;
+
+}
+
+.menu li:hover{
+
+background:rgba(255,255,255,.08);
+
+transform:translateX(8px);
+
+}
+
+.menu .active{
+
+background:linear-gradient(135deg,#7c4dff,#5a36ff);
+
+box-shadow:0 0 18px rgba(124,77,255,.45);
+
+}
+
+/* ==========================
+ Main
+==========================*/
+
+.main{
+
+padding:30px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:28px;
+
+}
+
+/* ==========================
+ Header
+==========================*/
+
+.header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:20px 28px;
+
+}
+
+.search{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+width:420px;
+
+background:rgba(255,255,255,.06);
+
+padding:14px 18px;
+
+border-radius:18px;
+
+}
+
+.search input{
+
+background:none;
+
+border:none;
+
+outline:none;
+
+color:#fff;
+
+font-size:16px;
+
+width:100%;
+
+}
+
+.search input::placeholder{
+
+color:#bbbbbb;
+
+}
+
+.header-right{
+
+display:flex;
+
+align-items:center;
+
+gap:18px;
+
+}
+
+.header-right button{
+
+width:48px;
+
+height:48px;
+
+border:none;
+
+border-radius:50%;
+
+cursor:pointer;
+
+background:rgba(255,255,255,.08);
+
+color:#fff;
+
+font-size:18px;
+
+transition:.3s;
+
+}
+
+.header-right button:hover{
+
+background:#7c4dff;
+
+transform:scale(1.08);
+
+}
+
+.profile{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+}
+
+.profile img{
+
+width:55px;
+
+height:55px;
+
+border-radius:50%;
+
+object-fit:cover;
+
+border:2px solid #7c4dff;
+
+}
+
+.profile h4{
+
+font-size:17px;
+
+}
+
+.profile p{
+
+font-size:13px;
+
+color:#b8b8b8;
+
+}
+
+/* ==========================
+ Hero Banner
+==========================*/
+
+.hero{
+
+display:grid;
+
+grid-template-columns:1.2fr 1fr;
+
+gap:30px;
+
+padding:35px;
+
+align-items:center;
+
+}
+
+.hero h1{
+
+font-size:46px;
+
+margin-bottom:15px;
+
+}
+
+.hero h3{
+
+font-weight:500;
+
+color:#00c2ff;
+
+margin-bottom:15px;
+
+}
+
+.hero p{
+
+line-height:1.8;
+
+color:#cfcfcf;
+
+margin-bottom:25px;
+
+}
+
+.hero button{
+
+padding:14px 30px;
+
+border:none;
+
+border-radius:40px;
+
+background:linear-gradient(90deg,#7c4dff,#00c2ff);
+
+color:white;
+
+font-size:16px;
+
+cursor:pointer;
+
+transition:.35s;
+
+}
+
+.hero button:hover{
+
+transform:translateY(-3px) scale(1.03);
+
+box-shadow:0 0 30px rgba(124,77,255,.45);
+
+}
+
+.hero-right img{
+
+width:100%;
+
+border-radius:20px;
+
+display:block;
+
+}
+
+
+/*======================================================
+    Statistics Section
+======================================================*/
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:22px;
+
+}
+
+.stat-card{
+
+    padding:25px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+}
+
+.stat-card .icon{
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:18px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:28px;
+
+    background:linear-gradient(135deg,#7c4dff,#00c2ff);
+
+}
+
+.stat-card h2{
+
+    font-size:28px;
+
+    margin-bottom:8px;
+
+}
+
+.stat-card p{
+
+    color:#bfbfbf;
+
+}
+
+/*======================================================
+    Analytics
+======================================================*/
+
+.analytics{
+
+    display:grid;
+
+}
+
+.chart-card{
+
+    padding:30px;
+
+}
+
+.card-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
+}
+
+.card-header h2{
+
+    font-size:22px;
+
+}
+
+.card-header span{
+
+    color:#bbbbbb;
+
+}
+
+.chart-card canvas{
+
+    width:100% !important;
+
+    height:320px !important;
+
+}
+
+/*======================================================
+    Dashboard Grid
+======================================================*/
+
+.dashboard-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:24px;
+
+}
+
+/*======================================================
+    Generic Cards
+======================================================*/
+
+.task-card,
+.pomodoro-card,
+.project-card,
+.habit-card,
+.planner-card,
+.quote-card{
+
+    padding:25px;
+
+}
+
+/*======================================================
+    Task List
+======================================================*/
+
+.task-list{
+
+    list-style:none;
+
+}
+
+.task-list li{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:18px;
+
+    font-size:16px;
+
+}
+
+.task-list input{
+
+    width:20px;
+
+    height:20px;
+
+    accent-color:#7c4dff;
+
+}
+
+/*======================================================
+    Pomodoro
+======================================================*/
+
+.pomodoro-card{
+
+    text-align:center;
+
+}
+
+#timer{
+
+    font-size:58px;
+
+    margin:30px 0;
+
+    font-weight:700;
+
+    color:#00c2ff;
+
+}
+
+.timer-buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:15px;
+
+}
+
+.timer-buttons button{
+
+    border:none;
+
+    cursor:pointer;
+
+    padding:12px 24px;
+
+    border-radius:30px;
+
+    color:white;
+
+    background:linear-gradient(90deg,#7c4dff,#00c2ff);
+
+    transition:.3s;
+
+}
+
+.timer-buttons button:hover{
+
+    transform:translateY(-3px);
+
+}
+
+/*======================================================
+    AI Project
+======================================================*/
+
+.project-card img{
+
+    width:100%;
+
+    border-radius:16px;
+
+    margin:20px 0;
+
+}
+
+.project-card h3{
+
+    margin-bottom:10px;
+
+}
+
+.project-card p{
+
+    color:#c8c8c8;
+
+    margin-bottom:18px;
+
+}
+
+.progress{
+
+    width:100%;
+
+    height:12px;
+
+    background:rgba(255,255,255,.08);
+
+    border-radius:30px;
+
+    overflow:hidden;
+
+    margin-bottom:12px;
+
+}
+
+.progress-fill{
+
+    height:100%;
+
+    border-radius:30px;
+
+    background:linear-gradient(90deg,#7c4dff,#00c2ff);
+
+}
+
+/*======================================================
+    Habit Tracker
+======================================================*/
+
+.habit{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:18px;
+
+}
+
+.habit input{
+
+    width:20px;
+
+    height:20px;
+
+    accent-color:#00c2ff;
+
+}
+
+/*======================================================
+    Planner
+======================================================*/
+
+.planner-card img{
+
+    width:100%;
+
+    border-radius:16px;
+
+}
+
+/*======================================================
+    Quote
+======================================================*/
+
+.quote-card{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+}
+
+.quote-card blockquote{
+
+    margin-top:20px;
+
+    font-size:18px;
+
+    line-height:1.8;
+
+    color:#dddddd;
+
+    font-style:italic;
+
+}
+
+/*======================================================
+    Calendar
+======================================================*/
+
+.calendar-card{
+
+    padding:30px;
+
+}
+
+.calendar-grid{
+
+    margin-top:25px;
+
+    display:grid;
+
+    grid-template-columns:repeat(7,1fr);
+
+    gap:12px;
+
+}
+
+.calendar-grid span{
+
+    text-align:center;
+
+    color:#00c2ff;
+
+    font-weight:600;
+
+}
+
+.calendar-grid div{
+
+    height:60px;
+
+    border-radius:14px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(255,255,255,.05);
+
+    transition:.3s;
+
+    cursor:pointer;
+
+}
+
+.calendar-grid div:hover{
+
+    background:#7c4dff;
+
+}
+
+.active-day{
+
+    background:linear-gradient(135deg,#7c4dff,#00c2ff)!important;
+
+}
+
+/*======================================================
+    Footer
+======================================================*/
+
+.footer{
+
+    margin-top:10px;
+
+    padding:25px 35px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.footer h3{
+
+    color:#00c2ff;
+
+}
+
+.footer p{
+
+    color:#bbbbbb;
+
+}
+
+.footer-right{
+
+    display:flex;
+
+    gap:18px;
+
+}
+
+.footer-right a{
+
+    width:45px;
+
+    height:45px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:white;
+
+    text-decoration:none;
+
+    background:rgba(255,255,255,.08);
+
+    transition:.3s;
+
+}
+
+.footer-right a:hover{
+
+    background:#7c4dff;
+
+    transform:translateY(-5px);
+
+}
+
+/*======================================================
+    Scrollbar
+======================================================*/
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#080b17;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#7c4dff;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#00c2ff;
+
+}
+
+
+/*======================================================
+    Responsive Design
+======================================================*/
+
+@media (max-width:1400px){
+
+.stats{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+.dashboard-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+.hero{
+
+grid-template-columns:1fr;
+
+}
+
+.hero-right{
+
+margin-top:20px;
+
+}
+
+}
+
+@media (max-width:1100px){
+
+.container{
+
+grid-template-columns:90px 1fr;
+
+}
+
+.sidebar{
+
+padding:25px 15px;
+
+}
+
+.logo h2{
+
+display:none;
+
+}
+
+.menu li span{
+
+display:none;
+
+}
+
+.menu li{
+
+justify-content:center;
+
+}
+
+.search{
+
+width:280px;
+
+}
+
+}
+
+@media (max-width:768px){
+
+.container{
+
+grid-template-columns:1fr;
+
+}
+
+.sidebar{
+
+position:fixed;
+
+left:-100%;
+
+width:260px;
+
+height:100vh;
+
+z-index:999;
+
+transition:.4s;
+
+}
+
+.sidebar.active{
+
+left:0;
+
+}
+
+.main{
+
+padding:18px;
+
+}
+
+.header{
+
+flex-direction:column;
+
+gap:20px;
+
+align-items:flex-start;
+
+}
+
+.search{
+
+width:100%;
+
+}
+
+.stats{
+
+grid-template-columns:1fr;
+
+}
+
+.dashboard-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.hero{
+
+padding:25px;
+
+}
+
+.hero h1{
+
+font-size:34px;
+
+}
+
+.footer{
+
+flex-direction:column;
+
+gap:20px;
+
+text-align:center;
+
+}
+
+.calendar-grid div{
+
+height:45px;
+
+}
+
+}
+
+@media (max-width:500px){
+
+.profile p{
+
+display:none;
+
+}
+
+.profile h4{
+
+font-size:15px;
+
+}
+
+.hero h1{
+
+font-size:28px;
+
+}
+
+.hero h3{
+
+font-size:18px;
+
+}
+
+#timer{
+
+font-size:42px;
+
+}
+
+.timer-buttons{
+
+flex-direction:column;
+
+}
+
+.timer-buttons button{
+
+width:100%;
+
+}
+
+.stat-card{
+
+flex-direction:column;
+
+text-align:center;
+
+}
+
+}
+
+/*======================================================
+    Animations
+======================================================*/
+
+@keyframes fadeUp{
+
+0%{
+
+opacity:0;
+
+transform:translateY(40px);
+
+}
+
+100%{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+.hero,
+.stats,
+.analytics,
+.dashboard-grid,
+.calendar-section,
+.footer{
+
+animation:fadeUp .8s ease;
+
+}
+
+/*======================================================
+    Floating Animation
+======================================================*/
+
+@keyframes floating{
+
+0%{
+
+transform:translateY(0px);
+
+}
+
+50%{
+
+transform:translateY(-10px);
+
+}
+
+100%{
+
+transform:translateY(0px);
+
+}
+
+}
+
+.hero-right img{
+
+animation:floating 5s ease-in-out infinite;
+
+}
+
+/*======================================================
+    Glow Effect
+======================================================*/
+
+.glass::before{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+border-radius:22px;
+
+padding:1px;
+
+background:linear-gradient(
+135deg,
+rgba(255,255,255,.25),
+rgba(255,255,255,0)
+);
+
+-webkit-mask:
+linear-gradient(#fff 0 0) content-box,
+linear-gradient(#fff 0 0);
+
+-webkit-mask-composite:xor;
+
+mask-composite:exclude;
+
+pointer-events:none;
+
+}
+
+/* Required because .glass::before is absolute */
+
+.glass{
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+/*======================================================
+    Shine Hover
+======================================================*/
+
+.glass::after{
+
+content:"";
+
+position:absolute;
+
+top:-120%;
+
+left:-40%;
+
+width:60%;
+
+height:300%;
+
+background:rgba(255,255,255,.08);
+
+transform:rotate(25deg);
+
+transition:.7s;
+
+}
+
+.glass:hover::after{
+
+left:130%;
+
+}
+
+/*======================================================
+    Buttons
+======================================================*/
+
+button{
+
+transition:.3s;
+
+}
+
+button:hover{
+
+box-shadow:
+
+0 0 18px rgba(124,77,255,.45),
+
+0 0 35px rgba(0,194,255,.25);
+
+}
+
+/*======================================================
+    Card Titles
+======================================================*/
+
+.card-header h2{
+
+background:linear-gradient(
+90deg,
+#ffffff,
+#00c2ff);
+
+-webkit-background-clip:text;
+
+color:transparent;
+
+}
+
+/*======================================================
+    Selection
+======================================================*/
+
+::selection{
+
+background:#7c4dff;
+
+color:white;
+
+}
+
+/*======================================================
+    Inputs
+======================================================*/
+
+input{
+
+color:white;
+
+}
+
+input:focus{
+
+outline:none;
+
+}
+
+/*======================================================
+    Image Hover
+======================================================*/
+
+img{
+
+transition:.35s;
+
+}
+
+.project-card img:hover,
+.planner-card img:hover,
+.hero-right img:hover{
+
+transform:scale(1.03);
+
+}
+
+/*======================================================
+    Icon Hover
+======================================================*/
+
+i{
+
+transition:.3s;
+
+}
+
+.menu li:hover i{
+
+color:#00c2ff;
+
+}
+
+.stat-card:hover .icon{
+
+transform:rotate(-8deg) scale(1.08);
+
+}
+
+/*======================================================
+    Smooth Transition
+======================================================*/
+
+*{
+
+transition:
+background .3s,
+color .3s,
+border .3s,
+transform .3s;
+
+}
+
+.task-add{
+
+display:flex;
+
+gap:10px;
+
+margin:20px 0;
+
+}
+
+.task-add input{
+
+flex:1;
+
+padding:12px;
+
+border:none;
+
+border-radius:12px;
+
+background:rgba(255,255,255,.08);
+
+color:white;
+
+}
+
+.task-add button{
+
+padding:12px 18px;
+
+border:none;
+
+cursor:pointer;
+
+border-radius:12px;
+
+background:#7c4dff;
+
+color:white;
+
+}
+
+.task-item{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:12px;
+
+margin-bottom:12px;
+
+background:rgba(255,255,255,.05);
+
+border-radius:12px;
+
+}
+
+.task-item span{
+
+flex:1;
+
+margin-left:10px;
+
+}
+
+.task-actions{
+
+display:flex;
+
+gap:10px;
+
+}
+
+.task-actions button{
+
+width:35px;
+
+height:35px;
+
+border:none;
+
+border-radius:8px;
+
+cursor:pointer;
+
+}
+
+/* ======================================
+   Habit Tracker
+====================================== */
+
+.habit-add{
+
+display:flex;
+
+gap:10px;
+
+margin:20px 0;
+
+}
+
+.habit-add input{
+
+flex:1;
+
+padding:12px;
+
+border:none;
+
+outline:none;
+
+border-radius:12px;
+
+background:rgba(255,255,255,.08);
+
+color:white;
+
+}
+
+.habit-add button{
+
+padding:12px 20px;
+
+border:none;
+
+border-radius:12px;
+
+cursor:pointer;
+
+background:linear-gradient(135deg,#7c4dff,#00c2ff);
+
+color:white;
+
+}
+
+.habit-item{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:14px;
+
+margin-bottom:12px;
+
+border-radius:14px;
+
+background:rgba(255,255,255,.05);
+
+}
+
+.habit-left{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+}
+
+.habit-left input{
+
+width:20px;
+
+height:20px;
+
+}
+
+.habit-actions{
+
+display:flex;
+
+gap:10px;
+
+}
+
+.habit-actions button{
+
+border:none;
+
+padding:8px 12px;
+
+border-radius:8px;
+
+cursor:pointer;
+
+background:#7c4dff;
+
+color:white;
+
+}
+
+/*======================================
+LeetCode Tracker
+======================================*/
+
+.leetcode-card{
+
+padding:25px;
+
+}
+
+.leetcode-stats{
+
+display:flex;
+
+justify-content:space-between;
+
+margin:25px 0;
+
+}
+
+.level{
+
+width:30%;
+
+padding:18px;
+
+text-align:center;
+
+border-radius:18px;
+
+background:rgba(255,255,255,.05);
+
+}
+
+.level h3{
+
+font-size:32px;
+
+margin-bottom:10px;
+
+}
+
+.easy{
+
+border-left:5px solid #00c853;
+
+}
+
+.medium{
+
+border-left:5px solid orange;
+
+}
+
+.hard{
+
+border-left:5px solid red;
+
+}
+
+.leetcode-buttons{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:15px;
+
+margin-top:20px;
+
+}
+
+.leetcode-buttons button{
+
+padding:12px;
+
+border:none;
+
+cursor:pointer;
+
+border-radius:12px;
+
+background:linear-gradient(90deg,#7c4dff,#00c2ff);
+
+color:white;
+
+font-size:15px;
+
+}
+
+/*=============================
+100xDevs Tracker
+=============================*/
+
+.course-card{
+
+padding:25px;
+
+}
+
+.course{
+
+margin-bottom:25px;
+
+}
+
+.course-info{
+
+display:flex;
+
+justify-content:space-between;
+
+margin-bottom:8px;
+
+font-weight:600;
+
+}
+
+.course-buttons{
+
+display:flex;
+
+gap:10px;
+
+margin-top:10px;
+
+}
+
+.course-buttons button{
+
+padding:8px 16px;
+
+border:none;
+
+border-radius:10px;
+
+cursor:pointer;
+
+background:linear-gradient(90deg,#7c4dff,#00c2ff);
+
+color:white;
+
+}
+
+/*======================================
+AI Project Tracker
+======================================*/
+
+.ai-card{
+
+padding:25px;
+
+}
+
+.project-progress{
+
+margin:25px 0;
+
+}
+
+#projectPercent{
+
+margin-top:12px;
+
+text-align:center;
+
+}
+
+#milestoneList{
+
+margin-top:25px;
+
+}
+
+.milestone{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:14px;
+
+margin-bottom:12px;
+
+border-radius:14px;
+
+background:rgba(255,255,255,.05);
+
+}
+
+.milestone span{
+
+font-weight:500;
+
+}
+
+#projectNotes{
+
+margin-top:20px;
+
+width:100%;
+
+height:120px;
+
+padding:15px;
+
+border:none;
+
+outline:none;
+
+border-radius:14px;
+
+background:rgba(255,255,255,.08);
+
+color:white;
+
+resize:none;
+
+}
+
+#saveNotes{
+
+margin-top:15px;
+
+width:100%;
+
+padding:14px;
+
+border:none;
+
+border-radius:12px;
+
+cursor:pointer;
+
+background:linear-gradient(90deg,#7c4dff,#00c2ff);
+
+color:white;
+
+}
+
+/*===============================
+Weekly Planner
+===============================*/
+
+.planner-card{
+
+padding:25px;
+
+}
+
+.planner-add{
+
+display:flex;
+
+gap:10px;
+
+margin:20px 0;
+
+flex-wrap:wrap;
+
+}
+
+.planner-add input,
+.planner-add select{
+
+padding:10px;
+
+border:none;
+
+border-radius:10px;
+
+background:rgba(255,255,255,.08);
+
+color:white;
+
+}
+
+.planner-add button{
+
+padding:10px 18px;
+
+border:none;
+
+cursor:pointer;
+
+border-radius:10px;
+
+background:linear-gradient(90deg,#7c4dff,#00c2ff);
+
+color:white;
+
+}
+
+.planner-grid{
+
+display:grid;
+
+grid-template-columns:repeat(7,1fr);
+
+gap:15px;
+
+margin-top:20px;
+
+}
+
+.day-column{
+
+background:rgba(255,255,255,.05);
+
+padding:12px;
+
+border-radius:15px;
+
+min-height:260px;
+
+}
+
+.day-column h3{
+
+text-align:center;
+
+margin-bottom:15px;
+
+color:#00c2ff;
+
+}
+
+.plan-item{
+
+background:rgba(255,255,255,.08);
+
+padding:10px;
+
+border-radius:10px;
+
+margin-bottom:10px;
+
+font-size:14px;
+
+}
+
+.plan-item button{
+
+margin-top:8px;
+
+width:100%;
+
+border:none;
+
+padding:6px;
+
+cursor:pointer;
+
+border-radius:8px;
+
+background:red;
+
+color:white;
+
+}
