@@ -10,6 +10,8 @@ import {
   ChevronRight,
 } from "lucide-react";
 
+import useProfile from "../../hooks/useProfile";
+
 const menuItems = [
   {
     label: "Dashboard",
@@ -49,6 +51,12 @@ const bottomItems = [
 export default function Sidebar({ open, setOpen }) {
   const currentPath = window.location.pathname;
 
+  const { user, loading } = useProfile();
+
+  const fullName = user?.full_name || "User";
+  const firstName = fullName.trim().split(" ")[0] || "User";
+  const initial = firstName.charAt(0).toUpperCase();
+
   return (
     <aside
       className={`
@@ -76,7 +84,6 @@ export default function Sidebar({ open, setOpen }) {
     >
       {/* Logo */}
       <div className="mb-8 flex items-center gap-3 px-3">
-
         <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-500 to-blue-600 shadow-lg shadow-violet-500/20">
           <Code2 size={23} />
         </div>
@@ -90,9 +97,9 @@ export default function Sidebar({ open, setOpen }) {
             Developer OS
           </p>
         </div>
-
       </div>
 
+      {/* Mobile close */}
       <button
         onClick={() => setOpen(false)}
         className="absolute right-4 top-5 rounded-xl p-2 text-slate-500 hover:bg-white/5 hover:text-white lg:hidden"
@@ -109,7 +116,6 @@ export default function Sidebar({ open, setOpen }) {
 
       {/* Main Navigation */}
       <nav className="space-y-1">
-
         {menuItems.map((item) => {
           const Icon = item.icon;
           const active = currentPath === item.path;
@@ -128,7 +134,6 @@ export default function Sidebar({ open, setOpen }) {
                 }
               `}
             >
-
               {active && (
                 <span className="absolute left-0 h-7 w-1 rounded-r-full bg-gradient-to-b from-violet-400 to-blue-500" />
               )}
@@ -152,24 +157,19 @@ export default function Sidebar({ open, setOpen }) {
                   className="ml-auto text-violet-400"
                 />
               )}
-
             </a>
           );
         })}
-
       </nav>
 
       {/* AI Workspace */}
       <div className="mt-8">
-
         <p className="mb-3 px-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-600">
           Intelligence
         </p>
 
         <button className="group w-full rounded-2xl border border-violet-500/20 bg-gradient-to-br from-violet-500/10 to-blue-500/10 p-4 text-left transition hover:border-violet-400/30 hover:bg-violet-500/15">
-
           <div className="flex items-center gap-3">
-
             <div className="rounded-xl bg-violet-500/20 p-2">
               <Sparkles
                 size={18}
@@ -186,16 +186,12 @@ export default function Sidebar({ open, setOpen }) {
                 Coming soon
               </p>
             </div>
-
           </div>
-
         </button>
-
       </div>
 
       {/* Bottom */}
       <div className="mt-auto">
-
         {bottomItems.map((item) => {
           const Icon = item.icon;
 
@@ -206,6 +202,7 @@ export default function Sidebar({ open, setOpen }) {
               className="flex items-center gap-3 rounded-2xl px-4 py-3 text-slate-400 transition hover:bg-white/5 hover:text-white"
             >
               <Icon size={19} />
+
               <span className="text-sm font-medium">
                 {item.label}
               </span>
@@ -213,27 +210,23 @@ export default function Sidebar({ open, setOpen }) {
           );
         })}
 
-        {/* Profile */}
+        {/* Dynamic Profile */}
         <div className="mt-3 flex items-center gap-3 rounded-2xl border border-white/5 bg-white/[0.03] p-3">
-
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-blue-500 font-bold">
-            J
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-blue-500 font-bold text-white">
+            {loading ? "..." : initial}
           </div>
 
           <div className="min-w-0">
-            <p className="truncate text-sm font-semibold">
-              Jagadeesh
+            <p className="truncate text-sm font-semibold text-white">
+              {loading ? "Loading..." : firstName}
             </p>
 
             <p className="truncate text-xs text-slate-500">
               Developer
             </p>
           </div>
-
         </div>
-
       </div>
-
     </aside>
   );
 }

@@ -225,9 +225,18 @@ export default function Login() {
         </div>
 
         {/* Test account */}
-        <p className="mt-5 text-center text-xs text-slate-600">
-          Test account: devforge@test.com
-        </p>
+        <div className="mt-5 text-center">
+          <p className="text-sm text-slate-500">
+            Don't have an account?{" "}
+            <button
+              type="button"
+              onClick={() => navigate("/signup")}
+              className="font-medium text-violet-400 transition hover:text-violet-300"
+            >
+              Sign Up
+            </button>
+          </p>
+        </div>
 
       </div>
 
