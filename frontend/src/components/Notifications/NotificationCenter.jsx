@@ -19,7 +19,7 @@ export default function NotificationCenter() {
     fetchNotifications();
   }, []);
 
-  const fetchNotifications = async () => {
+  async function fetchNotifications() {
     setLoading(true);
 
     try {
@@ -114,7 +114,7 @@ export default function NotificationCenter() {
     } finally {
       setLoading(false);
     }
-  };
+  }
 
   const markAllRead = () => {
     setItems([]);

@@ -1,3 +1,4 @@
+@'
 # Logs
 logs
 *.log
@@ -22,10 +23,18 @@ dist-ssr
 # Local environment files
 *.local
 
-# Editor files
-.vscode/
-.idea/
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
 
 # OS files
 .DS_Store
-Thumbs.db
+
+# Database backups
+*.backup
+*.bak
+
+# Archives
+*.zip
+'@ | Set-Content "frontend\.gitignore" -Encoding UTF8

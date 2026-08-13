@@ -1,65 +1,128 @@
 const noteModel = require("../models/noteModel");
 
-// Get all notes
+// ============================================================
+// GET NOTES
+// ============================================================
+
 exports.getNotes = async (req, res) => {
-    try {
-        const notes = await noteModel.getNotes(req.user.id);
-        res.json(notes);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: "Server Error" });
-    }
+  try {
+    const userId = req.user.id;
+
+    const notes = await noteModel.getNotes(userId);
+
+    res.json(notes);
+  } catch (err) {
+    console.error("Get notes error:", err);
+
+    res.status(500).json({
+      message: "Server Error",
+    });
+  }
 };
 
-// Create note
+// ============================================================
+// CREATE NOTE
+// ============================================================
+
 exports.addNote = async (req, res) => {
-    try {
-        const { title, content } = req.body;
+  try {
+    const userId = req.user.id;
 
-        const note = await noteModel.createNote(
-            req.user.id,
-            title,
-            content
-        );
+    const { title, content } = req.body;
 
-        res.status(201).json(note);
-
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: "Server Error" });
+    if (!title || !title.trim()) {
+      return res.status(400).json({
+        message: "Note title is required",
+      });
     }
+
+    const note = await noteModel.createNote(
+      userId,
+      title.trim(),
+      content?.trim() || ""
+    );
+
+    res.status(201).json(note);
+  } catch (err) {
+    console.error("Create note error:", err);
+
+    res.status(500).json({
+      message: "Server Error",
+    });
+  }
 };
 
-// Update note
+// ============================================================
+// UPDATE NOTE
+// ============================================================
+
 exports.updateNote = async (req, res) => {
-    try {
-        const { title, content } = req.body;
+  try {
+    const userId = req.user.id;
 
-        const note = await noteModel.updateNote(
-            req.params.id,
-            title,
-            content
-        );
+    const { id } = req.params;
+    const { title, content } = req.body;
 
-        res.json(note);
-
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: "Server Error" });
+    if (!title || !title.trim()) {
+      return res.status(400).json({
+        message: "Note title is required",
+      });
     }
+
+    const note = await noteModel.updateNote(
+      id,
+      userId,
+      title.trim(),
+      content?.trim() || ""
+    );
+
+    // Not found OR belongs to another user
+    if (!note) {
+      return res.status(404).json({
+        message: "Note not found",
+      });
+    }
+
+    res.json(note);
+  } catch (err) {
+    console.error("Update note error:", err);
+
+    res.status(500).json({
+      message: "Server Error",
+    });
+  }
 };
 
-// Delete note
+// ============================================================
+// DELETE NOTE
+// ============================================================
+
 exports.deleteNote = async (req, res) => {
-    try {
-        await noteModel.deleteNote(req.params.id);
+  try {
+    const userId = req.user.id;
 
-        res.json({
-            message: "Note deleted successfully"
-        });
+    const { id } = req.params;
 
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: "Server Error" });
+    const note = await noteModel.deleteNote(
+      id,
+      userId
+    );
+
+    // Not found OR belongs to another user
+    if (!note) {
+      return res.status(404).json({
+        message: "Note not found",
+      });
     }
+
+    res.json({
+      message: "Note deleted successfully",
+    });
+  } catch (err) {
+    console.error("Delete note error:", err);
+
+    res.status(500).json({
+      message: "Server Error",
+    });
+  }
 };

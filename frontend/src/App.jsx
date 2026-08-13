@@ -7,6 +7,11 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import Settings from "./pages/Settings/Settings";
 import Profile from "./components/Profile/Profile";
 import ProtectedRoute from "./components/Auth/ProtectedRoute";
+import Projects from "./pages/Projects/Projects";
+import Tasks from "./pages/Tasks/Tasks";
+import Notes from "./pages/Notes/Notes";
+import Events from "./pages/Events/Events";
+import Calendar from "./pages/Calendar/Calendar";
 
 function App() {
   return (
@@ -37,6 +42,30 @@ function App() {
           <Route
             path="/dashboard"
             element={<Dashboard />}
+          />
+          <Route
+            path="/projects"
+            element={<Projects />}
+          />
+
+          <Route
+            path="/tasks"
+            element={<Tasks />}
+          />
+
+          <Route
+            path="/notes"
+            element={<Notes />}
+          />
+
+          <Route
+            path="/events"
+            element={<Events />}
+          />
+
+          <Route
+            path="/calendar"
+            element={<Calendar />}
           />
 
           <Route

@@ -3,19 +3,19 @@ import { motion } from "framer-motion";
 
 export default function Hero() {
   // Get currently logged-in user
-  let user = null;
-
-  try {
-    user = JSON.parse(localStorage.getItem("user"));
-  } catch {
-    user = null;
-  }
+  const user = (() => {
+    try {
+      return JSON.parse(localStorage.getItem("user")) || null;
+    } catch {
+      return null;
+    }
+  })();
 
   // Get first name
   const firstName =
     user?.full_name?.trim()?.split(" ")[0] || "Developer";
 
-  // Dynamic greeting based on current time
+  // Dynamic greeting
   const hour = new Date().getHours();
 
   let greeting = "Good Evening";
@@ -39,12 +39,11 @@ export default function Hero() {
       }}
       className="relative overflow-hidden rounded-3xl p-8"
     >
-      {/* Background Blur */}
+      {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-r from-violet-600/30 via-blue-600/20 to-cyan-500/20" />
 
       <div className="relative flex items-center justify-between">
         <div>
-
           <div className="flex items-center gap-2 text-yellow-300">
             <Sparkles size={18} />
 
@@ -61,14 +60,15 @@ export default function Hero() {
             Manage projects, tasks, notes and events from one
             premium workspace.
           </p>
-
         </div>
 
-        <button className="flex items-center gap-2 rounded-2xl bg-white px-6 py-3 font-semibold text-slate-900 shadow-xl transition hover:scale-105">
+        <button
+          type="button"
+          className="flex items-center gap-2 rounded-2xl bg-white px-6 py-3 font-semibold text-slate-900 shadow-xl transition hover:scale-105"
+        >
           Start Working
           <ArrowRight size={18} />
         </button>
-
       </div>
     </motion.div>
   );

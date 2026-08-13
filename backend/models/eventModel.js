@@ -1,79 +1,93 @@
-const db = require("../config/db");
+﻿const db = require("../config/db");
 
-// Get all events for a user
 const getEvents = async (userId) => {
     const result = await db.query(
-        `
-        SELECT *
-        FROM events
-        WHERE user_id = $1
-        ORDER BY event_date ASC
-        `,
+        `SELECT *
+         FROM events
+         WHERE user_id = $1
+         ORDER BY event_date ASC`,
         [userId]
     );
 
     return result.rows;
 };
 
-// Create a new event
-const createEvent = async (userId, title, description, eventDate) => {
+const createEvent = async (
+    userId,
+    title,
+    description,
+    eventDate,
+    eventType
+) => {
     const result = await db.query(
-        `
-        INSERT INTO events (
+        `INSERT INTO events (
             user_id,
             title,
             event_date,
             created_at,
-            description
+            description,
+            event_type
         )
-        VALUES ($1, $2, $3, NOW(), $4)
-        RETURNING *
-        `,
+        VALUES ($1, $2, $3, NOW(), $4, $5)
+        RETURNING *`,
         [
             userId,
             title,
             eventDate,
-            description
+            description || "",
+            eventType || "meeting",
         ]
     );
 
     return result.rows[0];
 };
 
-// Update an event
-const updateEvent = async (id, title, description, eventDate) => {
+const updateEvent = async (
+    id,
+    userId,
+    title,
+    description,
+    eventDate,
+    eventType
+) => {
     const result = await db.query(
-        `
-        UPDATE events
-        SET
+        `UPDATE events
+         SET
             title = $1,
             event_date = $2,
-            description = $3
-        WHERE id = $4
-        RETURNING *
-        `,
+            description = $3,
+            event_type = $4
+         WHERE id = $5
+           AND user_id = $6
+         RETURNING *`,
         [
             title,
             eventDate,
-            description,
-            id
+            description || "",
+            eventType || "meeting",
+            id,
+            userId,
         ]
     );
 
-    return result.rows[0];
+    return result.rows[0] || null;
 };
 
-// Delete an event
-const deleteEvent = async (id) => {
-    await db.query(
-        "DELETE FROM events WHERE id = $1",
-        [id]
+const deleteEvent = async (id, userId) => {
+    const result = await db.query(
+        `DELETE FROM events
+         WHERE id = $1
+           AND user_id = $2
+         RETURNING id`,
+        [id, userId]
     );
+
+    return result.rows[0] || null;
 };
 
 module.exports = {
     getEvents,
     createEvent,
     updateEvent,
-    deleteEvent
+    deleteEvent,
 };

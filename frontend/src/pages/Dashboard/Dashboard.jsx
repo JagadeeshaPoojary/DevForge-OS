@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import DashboardLayout from "../../layouts/DashboardLayout";
 import Hero from "../../components/Hero/Hero";
 import Stats from "../../components/Stats/Stats";
@@ -9,12 +11,33 @@ import UpcomingEvents from "../../pages/Events/UpcomingEvents";
 import PageTransition from "../../components/UI/PageTransition";
 
 export default function Dashboard() {
+  useEffect(() => {
+    // Refresh the dashboard when the page becomes visible again.
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        window.dispatchEvent(
+          new CustomEvent("devforge:dashboard-refresh")
+        );
+      }
+    };
+
+    document.addEventListener(
+      "visibilitychange",
+      handleVisibilityChange
+    );
+
+    return () => {
+      document.removeEventListener(
+        "visibilitychange",
+        handleVisibilityChange
+      );
+    };
+  }, []);
+
   return (
     <DashboardLayout>
       <PageTransition>
-
         <div className="space-y-8">
-
           {/* Hero */}
           <Hero />
 
@@ -38,9 +61,7 @@ export default function Dashboard() {
 
           {/* Events */}
           <UpcomingEvents />
-
         </div>
-
       </PageTransition>
     </DashboardLayout>
   );
