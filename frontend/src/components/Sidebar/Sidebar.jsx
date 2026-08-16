@@ -9,10 +9,10 @@ import {
   Sparkles,
   ChevronRight,
 } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
-//import { NavLink } from "react-router-dom";
+
+import { NavLink } from "react-router-dom";
 import useProfile from "../../hooks/useProfile";
-const { pathname: currentPath } = useLocation();
+
 const menuItems = [
   {
     label: "Dashboard",
@@ -119,7 +119,7 @@ export default function Sidebar({ open, setOpen }) {
           const Icon = item.icon;
 
           return (
-            <Link
+            <NavLink
               key={item.label}
               to={item.path}
               onClick={() => setOpen(false)}
@@ -160,7 +160,7 @@ export default function Sidebar({ open, setOpen }) {
                   )}
                 </>
               )}
-            </Link>
+            </NavLink>
           );
         })}
       </nav>
@@ -199,7 +199,7 @@ export default function Sidebar({ open, setOpen }) {
           const Icon = item.icon;
 
           return (
-            <Link
+            <NavLink
               key={item.label}
               to={item.path}
               onClick={() => setOpen(false)}
@@ -218,7 +218,7 @@ export default function Sidebar({ open, setOpen }) {
               <span className="text-sm font-medium">
                 {item.label}
               </span>
-            </Link>
+            </NavLink>
           );
         })}
 
