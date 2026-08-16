@@ -10,6 +10,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 
+import { NavLink } from "react-router-dom";
 import useProfile from "../../hooks/useProfile";
 
 const menuItems = [
@@ -49,8 +50,6 @@ const bottomItems = [
 ];
 
 export default function Sidebar({ open, setOpen }) {
-  const currentPath = window.location.pathname;
-
   const { user, loading } = useProfile();
 
   const fullName = user?.full_name || "User";
@@ -118,46 +117,50 @@ export default function Sidebar({ open, setOpen }) {
       <nav className="space-y-1">
         {menuItems.map((item) => {
           const Icon = item.icon;
-          const active = currentPath === item.path;
 
           return (
-            <a
+            <NavLink
               key={item.label}
-              href={item.path}
-              className={`
+              to={item.path}
+              onClick={() => setOpen(false)}
+              className={({ isActive }) => `
                 group relative flex items-center gap-3 rounded-2xl px-4 py-3
                 transition-all duration-200
                 ${
-                  active
+                  isActive
                     ? "bg-violet-500/15 text-white shadow-lg shadow-violet-950/20"
                     : "text-slate-400 hover:bg-white/5 hover:text-white"
                 }
               `}
             >
-              {active && (
-                <span className="absolute left-0 h-7 w-1 rounded-r-full bg-gradient-to-b from-violet-400 to-blue-500" />
+              {({ isActive }) => (
+                <>
+                  {isActive && (
+                    <span className="absolute left-0 h-7 w-1 rounded-r-full bg-gradient-to-b from-violet-400 to-blue-500" />
+                  )}
+
+                  <Icon
+                    size={19}
+                    className={
+                      isActive
+                        ? "text-violet-400"
+                        : "text-slate-500 group-hover:text-slate-300"
+                    }
+                  />
+
+                  <span className="text-sm font-medium">
+                    {item.label}
+                  </span>
+
+                  {isActive && (
+                    <ChevronRight
+                      size={15}
+                      className="ml-auto text-violet-400"
+                    />
+                  )}
+                </>
               )}
-
-              <Icon
-                size={19}
-                className={
-                  active
-                    ? "text-violet-400"
-                    : "text-slate-500 group-hover:text-slate-300"
-                }
-              />
-
-              <span className="text-sm font-medium">
-                {item.label}
-              </span>
-
-              {active && (
-                <ChevronRight
-                  size={15}
-                  className="ml-auto text-violet-400"
-                />
-              )}
-            </a>
+            </NavLink>
           );
         })}
       </nav>
@@ -196,17 +199,26 @@ export default function Sidebar({ open, setOpen }) {
           const Icon = item.icon;
 
           return (
-            <a
+            <NavLink
               key={item.label}
-              href={item.path}
-              className="flex items-center gap-3 rounded-2xl px-4 py-3 text-slate-400 transition hover:bg-white/5 hover:text-white"
+              to={item.path}
+              onClick={() => setOpen(false)}
+              className={({ isActive }) => `
+                flex items-center gap-3 rounded-2xl px-4 py-3
+                transition
+                ${
+                  isActive
+                    ? "bg-violet-500/15 text-white"
+                    : "text-slate-400 hover:bg-white/5 hover:text-white"
+                }
+              `}
             >
               <Icon size={19} />
 
               <span className="text-sm font-medium">
                 {item.label}
               </span>
-            </a>
+            </NavLink>
           );
         })}
 
