@@ -6,7 +6,16 @@ const db = require("../config/db");
 
 const getTasks = async (userId) => {
   const result = await db.query(
-    `SELECT *
+    `SELECT
+       id,
+       project_id,
+       title,
+       description,
+       priority,
+       status,
+       due_date,
+       created_at,
+       user_id
      FROM tasks
      WHERE user_id = $1
      ORDER BY created_at DESC`,

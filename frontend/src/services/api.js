@@ -15,6 +15,8 @@ const api = axios.create({
 let connectionToastShown = false;
 let connectionToastTimer = null;
 let authenticationToastShown = false;
+let serverErrorToastShown = false;
+let serverErrorToastTimer = null;
 
 // Request interceptor
 api.interceptors.request.use(
@@ -61,7 +63,20 @@ api.interceptors.response.use(
 
     // 500+ Server Error
     else if (error.response?.status >= 500) {
-      toast.error("Server error. Please try again.");
+      if (!serverErrorToastShown) {
+        serverErrorToastShown = true;
+
+        toast.error(
+          error.response?.data?.message ||
+            "Server error. Please try again."
+        );
+
+        clearTimeout(serverErrorToastTimer);
+
+        serverErrorToastTimer = setTimeout(() => {
+          serverErrorToastShown = false;
+        }, 5000);
+      }
     }
 
     // Backend unavailable

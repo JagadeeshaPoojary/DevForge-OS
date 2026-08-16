@@ -52,12 +52,14 @@ export default function TodayTasks() {
       const completed =
         task.status?.toLowerCase() === "completed";
 
-      const newStatus = completed ? "Pending" : "Completed";
+      const newStatus = completed
+        ? "pending"
+        : "completed";
 
       const response = await api.put(`/tasks/${task.id}`, {
         title: task.title,
         description: task.description || "",
-        priority: task.priority || "Medium",
+        priority: task.priority || "medium",
         status: newStatus,
         due_date: task.due_date || null,
       });

@@ -1,106 +1,102 @@
 const db = require("../config/db");
 
 // ============================================================
-// GET ALL EVENTS FOR USER
+// GET ALL NOTES FOR USER
 // ============================================================
 
-const getEvents = async (userId) => {
-    const result = await db.query(
-        `SELECT *
-         FROM events
-         WHERE user_id = $1
-         ORDER BY event_date ASC`,
-        [userId]
-    );
+const getNotes = async (userId) => {
+  const result = await db.query(
+    `SELECT
+       id,
+       user_id,
+       title,
+       content,
+       created_at
+     FROM notes
+     WHERE user_id = $1
+     ORDER BY created_at DESC`,
+    [userId]
+  );
 
-    return result.rows;
+  return result.rows;
 };
 
 // ============================================================
-// CREATE EVENT
+// CREATE NOTE
 // ============================================================
 
-const createEvent = async (
-    userId,
-    title,
-    description,
-    eventDate,
-    eventType
+const createNote = async (
+  userId,
+  title,
+  content
 ) => {
-    const result = await db.query(
-        `INSERT INTO events (
-            user_id,
-            title,
-            event_date,
-            created_at,
-            description,
-            event_type
-        )
-        VALUES ($1, $2, $3, NOW(), $4, $5)
-        RETURNING *`,
-        [
-            userId,
-            title,
-            eventDate,
-            description || "",
-            eventType || "meeting",
-        ]
-    );
+  const result = await db.query(
+    `INSERT INTO notes (
+       user_id,
+       title,
+       content
+     )
+     VALUES ($1, $2, $3)
+     RETURNING *`,
+    [
+      userId,
+      title,
+      content || "",
+    ]
+  );
 
-    return result.rows[0];
+  return result.rows[0];
 };
 
 // ============================================================
-// UPDATE EVENT
-// IMPORTANT: user_id is checked for ownership
+// UPDATE NOTE
 // ============================================================
 
-const updateEvent = async (
-    id,
-    userId,
-    title,
-    description,
-    eventDate,
-    eventType
+const updateNote = async (
+  id,
+  userId,
+  title,
+  content
 ) => {
-    const result = await db.query(
-        `UPDATE events
-         SET
-            title = $1,
-            event_date = $2,
-            description = $3,
-            event_type = $4
-         WHERE id = $5
-           AND user_id = $6
-         RETURNING *`,
-        [
-            title,
-            eventDate,
-            description || "",
-            eventType || "meeting",
-            id,
-            userId,
-        ]
-    );
+  const result = await db.query(
+    `UPDATE notes
+     SET
+       title = $1,
+       content = $2
+     WHERE id = $3
+       AND user_id = $4
+     RETURNING *`,
+    [
+      title,
+      content || "",
+      id,
+      userId,
+    ]
+  );
 
-    return result.rows[0] || null;
+  return result.rows[0] || null;
 };
 
 // ============================================================
-// DELETE EVENT
-// IMPORTANT: user_id is checked for ownership
+// DELETE NOTE
 // ============================================================
 
-const deleteEvent = async (id, userId) => {
-    const result = await db.query(
-        `DELETE FROM events
-         WHERE id = $1
-           AND user_id = $2
-         RETURNING id`,
-        [id, userId]
-    );
+const deleteNote = async (
+  id,
+  userId
+) => {
+  const result = await db.query(
+    `DELETE FROM notes
+     WHERE id = $1
+       AND user_id = $2
+     RETURNING id`,
+    [
+      id,
+      userId,
+    ]
+  );
 
-    return result.rows[0] || null;
+  return result.rows[0] || null;
 };
 
 // ============================================================
@@ -108,8 +104,8 @@ const deleteEvent = async (id, userId) => {
 // ============================================================
 
 module.exports = {
-    getEvents,
-    createEvent,
-    updateEvent,
-    deleteEvent,
+  getNotes,
+  createNote,
+  updateNote,
+  deleteNote,
 };

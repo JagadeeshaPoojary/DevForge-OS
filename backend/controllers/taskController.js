@@ -16,12 +16,25 @@ exports.getTasks = async (req, res) => {
 
     const tasks = await getTasks(userId);
 
-    res.json(tasks);
+    res.status(200).json({
+      success: true,
+      tasks,
+    });
   } catch (err) {
-    console.error("Get tasks error:", err);
+    console.error("=================================");
+    console.error("GET TASKS ERROR");
+    console.error("Message:", err.message);
+    console.error("Code:", err.code);
+    console.error("Detail:", err.detail);
+    console.error("Hint:", err.hint);
+    console.error("=================================");
 
     res.status(500).json({
-      message: "Server Error",
+      success: false,
+      message: "Unable to load tasks",
+      error: process.env.NODE_ENV === "development"
+        ? err.message
+        : undefined,
     });
   }
 };
